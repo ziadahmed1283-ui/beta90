@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بطل الـ٩٠</title>
+  <meta name="description" content="انضم إلى تحدي الـ٩٠ يوم للإقلاع عن الإباحية والعادة السرية، استعد تركيزك وطاقة حياتك، وخد خطوات يومية مع دعم تحفيزي وأفكار دينية.">
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f8ff;
+      margin: 0;
+      padding: 0;
+      color: #222;
+      line-height: 1.7;
+      text-align: center;
+      transition: background 0.5s, transform 0.5s;
+    }
+    body.animate-success { background: #d4edda; transform: scale(1.02); }
+    body.animate-fail { background: #f8d7da; transform: scale(0.98); }
+    header {
+      background: #1e88e5;
+      color: #fff;
+      padding: 25px;
+      font-size: 24px;
+      text-shadow: 1px 1px #000;
+    }
+    .section {
+      padding: 25px;
+      margin: 20px auto;
+      background: #fff;
+      max-width: 900px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+    button {
+      padding: 10px 18px;
+      margin: 5px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      color: white;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    button:hover { transform: scale(1.1); box-shadow: 0 0 8px #00000055; }
+    .pass { background: #28a745; }
+    .fail { background: #dc3545; }
+    #feedback {
+      margin-top: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      transition: all 0.5s;
+    }
+    #dailyVerse {
+      font-size: 14px;
+      font-style: italic;
+      color: #1e88e5;
+      margin-top: 5px;
+      transition: all 0.5s;
+    }
+    #dayCircle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 8px solid #1e88e5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 20px auto;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    #daysList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 15px;
+      transition: all 0.3s;
+    }
+    .dayItem {
+      width: 50px;
+      margin: 5px;
+      padding: 5px;
+      border-radius: 6px;
+      background: #e0e0e0;
+      font-size: 12px;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .dayPass { background: #28a745; color: white; transform: scale(1.1); }
+    .dayFail { background: #dc3545; color: white; transform: scale(1.1); }
+    #congratsMessage {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1e88e5;
+      margin-top: 20px;
+      display: none;
+      animation: bounce 1s ease;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    footer {
+      margin-top: 30px;
+      padding: 15px;
+      background: #1e88e5;
+      color: white;
+      font-size: 16px;
+      border-radius: 12px 12px 0 0;
+    }
+    footer a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>بطل الـ٩٠</header>
+
+  <div class="section">
+    <p>
+      السلام عليكم و رحمة الله وبركاته،<br>
+      مع حضراتكم أخوكم زياد، مهندس برمجيات. وقت إنشاء الموقع عندي 20 سنة ومن محافظة بني سويف.<br><br>
+      كتير مننا قابلته مشكلة إدمان العادة السرية وإدمان الإباحية سواء ولد أو بنت. فيه اللي قدر يتخطى المرحلة، وفيه اللي محتاج دعم.<br>
+      <br>
+      ومن الدين: قال تعالى في سورة المؤمنون: "والذين هم لفروجهم حافظون"، والرسول ﷺ قال: "من استطاع منكم الباءة فليتزوج، فإنه أغض للبصر وأحصن للفرج".
+    </p>
+  </div>
+
+  <div class="section">
+    <div id="dayCircle">1</div>
+    <h2 id="dailyMotivation"></h2>
+    <div id="dailyVerse"></div>
+    <p>اختيار اليوم:</p>
+    <button class="pass" onclick="handleDay(true)">تم الاجتياز</button>
+    <button class="fail" onclick="handleDay(false)">للأسف انتكست</button>
+    <div id="feedback"></div>
+    <div id="daysList"></div>
+    <div id="congratsMessage"></div>
+  </div>
+
+  <footer>
+    تواصل معي: 
+    <a href="https://wa.me/201283274500" target="_blank">واتساب</a> |
+    <a href="https://www.facebook.com/share/1D6KpZfLUi/" target="_blank">فيس بوك</a>
+  </footer>
+
+  <script>
+    const motivationalPhrases = ['ابدأ يومك بطاقة جديدة!','كل خطوة صغيرة تقربك من هدفك!','انت قادر على التغيير!','كل يوم بدون إدمان هو انتصار!','استمر، أنت قوي أكثر مما تظن!'];
+    const encouragementPass = ['أحسنت! استمر على هذا الطريق!','مبروك! اليوم اجتزته بنجاح!','رائع! المخ بقى أقوى وأكثر تركيز!'];
+    const encouragementFail = ['ولا يهمك يا بطل، جرب تاني!','اليوم ممكن ما نجحش، بكرة فرصة جديدة!','استمر في المحاولة، كل يوم فرصة جديدة!'];
+    const verses = ['"إن مع العسر يسرا" (سورة الشرح:6)','"وما توفيقي إلا بالله" (سورة هود:88)','"إن الله لا يغير ما بقوم حتى يغيروا ما بأنفسهم" (سورة الرعد:11)'];
+
+    let currentDay = localStorage.getItem('currentDay') ? parseInt(localStorage.getItem('currentDay')) : 1;
+    const totalDays = 90;
+    const daysList = document.getElementById('daysList');
+    let completed = localStorage.getItem('completed') === 'true';
+
+    function getRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+    function updateDayCircle() {
+      const circle = document.getElementById('dayCircle');
+      circle.innerText = currentDay;
+      circle.style.borderColor = `hsl(${(currentDay/totalDays)*120}, 70%, 50%)`;
+      circle.style.transform = 'scale(1.2)';
+      setTimeout(() => { circle.style.transform = 'scale(1)'; }, 300);
+    }
+
+    function updateDaysList() {
+      daysList.innerHTML = '';
+      for (let i = 1; i <= totalDays; i++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'dayItem';
+        dayDiv.innerText = `اليوم ${i}`;
+        if (i < currentDay) dayDiv.classList.add('dayPass');
+        daysList.appendChild(dayDiv);
+      }
+    }
+
+    function showNotification(title, body) {
+      if (Notification.permission === 'granted') new Notification(title, { body });
+    }
+
+    function handleDay(passed) {
+      const feedback = document.getElementById('feedback');
+      const congratsMessage = document.getElementById('congratsMessage');
+      const dailyVerse = document.getElementById('dailyVerse');
+      document.body.classList.remove('animate-success', 'animate-fail');
+      congratsMessage.style.display = 'none';
+
+      dailyVerse.innerText = getRandom(verses);
+
+      if (passed) {
+        feedback.innerText = getRandom(encouragementPass);
+        feedback.style.color = '#28a745';
+        document.body.classList.add('animate-success');
+        new Audio('https://www.soundjay.com/human/cheer-01.mp3').play();
+        if (currentDay < totalDays) currentDay++;
+        else if (!completed) {
+          completed = true;
+          localStorage.setItem('completed', 'true');
+          congratsMessage.style.display = 'block';
+          congratsMessage.innerHTML = `🎉 مبروك يا بطل الـ٩٠! لقد أكملت رحلة ٩٠ يوم! 🎉<br>قال تعالى: \"إن مع العسر يسرا\"<br>أنت الآن قادر على مساعدة الآخرين واستمرار الطريق الصحيح!`;
+          new Audio('https://www.soundjay.com/misc/success-bell-01.mp3').play();
+        }
+      } else {
+        feedback.innerText = getRandom(encouragementFail);
+        feedback.style.color = '#dc3545';
+        document.body.classList.add('animate-fail');
+        new Audio('https://www.soundjay.com/button/button-10.mp3').play();
+        currentDay = 1;
+        localStorage.setItem('completed', 'false');
+      }
+
+      localStorage.setItem('currentDay', currentDay);
+      updateDayCircle();
+      updateDaysList();
+      document.getElementById('dailyMotivation').innerText = getRandom(motivationalPhrases);
+      showNotification('متابعة يومية', passed ? 'تم اجتياز اليوم بنجاح! استمر يا بطل!' : 'اليوم لم ينجح، لا تقلق وحاول مرة أخرى!');
+    }
+
+    if (Notification.permission !== 'granted') Notification.requestPermission();
+
+    updateDayCircle();
+    updateDaysList();
+    document.getElementById('dailyMotivation').innerText = getRandom(motivationalPhrases);
+    document.getElementById('dailyVerse').innerText = getRandom(verses);
+  </script>
+</body>
+</html>
